@@ -111,15 +111,3 @@ smart-license-plate/
 
 - Adjust Haar cascade or detection logic in `camera_utils.py` for best results
 - For debugging, logs are handled by `log_utils.py`
-
----
-
-## 📃 License
-
-MIT License
-
----
-
-## 👤 Author
-
-Developed by [Your Name] – Feel free to contribute!
