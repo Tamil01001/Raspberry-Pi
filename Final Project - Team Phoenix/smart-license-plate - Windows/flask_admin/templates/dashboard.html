@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plate Logs Dashboard</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+        }
+        input[type="submit"] {
+            padding: 8px 16px;
+        }
+        img.snapshot {
+            width: 100px;
+            height: auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Plate Logs Dashboard</h1>
+
+    <form method="POST">
+        <input type="text" name="search" placeholder="Search plate number..." value="{{ search_query or '' }}">
+        <input type="submit" value="Search">
+    </form>
+
+    {% if no_results %}
+        <p>No results found for "{{ search_query }}"</p>
+    {% endif %}
+
+    <table>
+        <tr>
+            <th>Plate Number</th>
+            <th>Timestamp</th>
+            <th>Confidence</th>
+            <th>Snapshot</th>
+        </tr>
+        {% for record in records %}
+        <tr>
+            <td>{{ record[0] }}</td>
+            <td>{{ record[1] }}</td>
+            <td>{{ record[2] }}</td>
+            <td>
+                <a href="{{ url_for('send_snapshot', filename=record[3].split('/')[-1]) }}" target="_blank">
+                    <img src="{{ url_for('send_snapshot', filename=record[3].split('/')[-1]) }}" alt="Snapshot" class="snapshot">
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
